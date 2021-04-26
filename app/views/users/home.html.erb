@@ -1,0 +1,10 @@
+<div class="hero">
+  <div class="hero-body">
+  <h1 class="title">Welcome</h1>
+  <% if signed_in? %>
+  <p class="subtitle"><%= current_user.name%></p>
+  </div>
+</div>
+  <%= button_to "Profile", edit_path(current_user), method: :get%>
+  <%= button_to "Products", products_path(current_user), method: :get%>
+<% end %>

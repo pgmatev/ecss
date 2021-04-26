@@ -1,6 +1,0 @@
-<h1>Welcome</h1>
-<% if signed_in? %>
-  <%= current_user.name %>
-  <%= button_to "Profile", profile_path, method: :get%>
-<%= button_to "Products", products_path, method: :get%>
-<% end %>

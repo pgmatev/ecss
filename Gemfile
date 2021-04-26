@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'clearance', '~> 2.3.0'
 
 # CSS framework
-gem "bulma-rails", "~> 0.8.0"
+gem 'bulma-rails', '~> 0.9.1'
 
 
 # Use Active Storage variant

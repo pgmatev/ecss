@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 2021_01_27_191559) do
     t.decimal "cost", precision: 10, scale: 2
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "users_id"
-    t.index ["users_id"], name: "index_deliveries_on_users_id"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_deliveries_on_user_id"
   end
 
   create_table "deliveries_products", id: false, force: :cascade do |t|
@@ -44,19 +44,19 @@ ActiveRecord::Schema.define(version: 2021_01_27_191559) do
     t.decimal "price", precision: 10, scale: 2
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "users_id"
+    t.bigint "user_id"
     t.string "barcode", limit: 12
-    t.index ["users_id"], name: "index_products_on_users_id"
+    t.index ["user_id"], name: "index_products_on_user_id"
   end
 
   create_table "sales", force: :cascade do |t|
     t.decimal "price", precision: 10, scale: 2
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "users_id"
-    t.bigint "clients_id"
-    t.index ["clients_id"], name: "index_sales_on_clients_id"
-    t.index ["users_id"], name: "index_sales_on_users_id"
+    t.bigint "user_id"
+    t.bigint "client_id"
+    t.index ["client_id"], name: "index_sales_on_client_id"
+    t.index ["user_id"], name: "index_sales_on_user_id"
   end
 
   create_table "sales_products", id: false, force: :cascade do |t|

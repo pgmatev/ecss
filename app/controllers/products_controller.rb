@@ -1,10 +1,10 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, :set_product, only: [:show, :edit, :update, :destroy]
 
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    @products = current_user.products.all
   end
 
   # GET /products/1
@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    @product = Product.new
+    @product = current_user.products.new
   end
 
   # GET /products/1/edit
@@ -24,8 +24,7 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    @product = Product.new(product_params)
-
+    @product = current_user.product.new(product_params)
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
@@ -64,7 +63,7 @@ class ProductsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
-      @product = Product.find(params[:id])
+      @product = current_user.products.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
