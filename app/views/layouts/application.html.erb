@@ -4,21 +4,41 @@
     <title>Ecss</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <div class="navbar">
+    <nav class="navbar">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">ECSS</a>
+      </div>
       <% if signed_in? %>
-      Signed in as: <%= current_user.email %>
-      <%= button_to 'Sign out', sign_out_path, method: :delete, class: "button is-secondary"%>
-      <% else %>
-      <%= link_to 'Sign in', sign_in_path, class: "button is-primary" %>
-      <% end %>
-    </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
 
-    <%= yield %>
+        Signed in as: <%= current_user.email %>
+        </div>
+        <div class="buttons">
+          <%= button_to 'Sign out', sign_out_path, method: :delete, class: "button is-secondary"%>
+        </div>
+      </div>
+      <% else %>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <%= link_to 'Sign in', sign_in_path, class: "button is-primary" %>
+            <%= link_to 'Sign up', sign_up_path, class: "button is-secondary" %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </nav>
+    <section class="section">
+      <div class="content">
+        <%= yield %>
+      </div>
+    </section>
   </body>
 </html>
