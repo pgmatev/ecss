@@ -17,5 +17,6 @@ Rails.application.routes.draw do
   root to: "users#home";
   resources :users
   resources :products
+  resources :sales
 end
  

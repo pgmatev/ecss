@@ -10,31 +10,33 @@
   </head>
 
   <body>
-    <nav class="navbar">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/">ECSS</a>
-      </div>
-      <% if signed_in? %>
-      <div class="navbar-end">
-        <div class="navbar-item">
+    <div class="box">
+      <nav class="navbar">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">ECSS</a>
+        </div>
+        <% if signed_in? %>
+        <div class="navbar-end">
+          <div class="navbar-item">
 
-        Signed in as: <%= current_user.email %>
-        </div>
-        <div class="buttons">
-          <%= button_to 'Sign out', sign_out_path, method: :delete, class: "button is-secondary"%>
-        </div>
-      </div>
-      <% else %>
-      <div class="navbar-end">
-        <div class="navbar-item">
+          Signed in as: <%= current_user.email %>
+          </div>
           <div class="buttons">
-            <%= link_to 'Sign in', sign_in_path, class: "button is-primary" %>
-            <%= link_to 'Sign up', sign_up_path, class: "button is-secondary" %>
+            <%= button_to 'Sign out', sign_out_path, method: :delete, class: "button is-secondary"%>
           </div>
         </div>
-      </div>
-      <% end %>
-    </nav>
+        <% else %>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <%= link_to 'Sign in', sign_in_path, class: "button is-primary" %>
+              <%= link_to 'Sign up', sign_up_path, class: "button is-secondary" %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </nav>
+    </div>
     <section class="section">
       <div class="content">
         <%= yield %>
