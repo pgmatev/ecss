@@ -16,9 +16,9 @@
     <div class="column">
       <article>
         <p class="title">Sales</p>
-        <%= link_to "Begin new sale", sales_path(current_user), method: :post, :class => "link"%>
+        <%= link_to "Begin new sale", sales_path, method: :post, :class => "link"%>
         <br>
-        <%= link_to "Sales History", sales_path(current_user), method: :get, :class => "link"%>
+        <%= link_to "Sales History", sales_path, method: :get, :class => "link"%>
 
       </article>
     </div>
@@ -33,7 +33,7 @@
     <div class="column">
       <article>
         <p class="title">Products</p>
-        <%= link_to "List all products", products_path(current_user), method: :get%>
+        <%= link_to "List all products", products_path, method: :get, :class => "link"%>
       </article>
     </div>
   </div>

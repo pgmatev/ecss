@@ -14,7 +14,7 @@ class SalesController < ApplicationController
 
   # GET /sales/new
   def new
-    @sale = current_user.sales..new
+    @sale = current_user.sales.new
   end
 
   # GET /sales/1/edit

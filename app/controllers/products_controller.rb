@@ -1,6 +1,5 @@
-class ProductsController < UsersController
+class ProductsController < ApplicationController
   before_action :require_login, :set_product, only: [:show, :edit, :update, :destroy]
-
   # GET /products
   # GET /products.json
   def index
@@ -28,10 +27,10 @@ class ProductsController < UsersController
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        # format.json { render :show, status: :created, location: @product }
+        format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new }
-        # format.json { render json: @product.errors, status: :unprocessable_entity }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,10 +41,10 @@ class ProductsController < UsersController
     respond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
-        # format.json { render :show, status: :ok, location: @product }
+        format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit }
-        # format.json { render json: @product.errors, status: :unprocessable_entity }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -56,7 +55,7 @@ class ProductsController < UsersController
     @product.destroy
     respond_to do |format|
       format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
-      # format.json { head :no_content }
+      format.json { head :no_content }
     end
   end
 
@@ -68,6 +67,6 @@ class ProductsController < UsersController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.fetch(:product, {})
+      params.require(:product).permit(:id, :name, :quantity, :price, :barcode)
     end
 end
