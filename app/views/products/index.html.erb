@@ -20,6 +20,16 @@
         <td><%= product.quantity %></td>
         <td><%= product.price %></td>
         <td><%= product.barcode %></td>
+        <td>
+          <%= link_to edit_product_path(product) do%>
+            <span class="icon-text">
+              <span>Edit</span>
+              <span class="icon">
+                <i class='fas fa-edit'></i>
+              </span>
+            </span>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
