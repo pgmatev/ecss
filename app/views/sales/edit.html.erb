@@ -1,5 +1,24 @@
-<h1>Editing Sale</h1>
-
+<div class="hero notification is-primary">
+    <div class="hero-body">
+        <div class="level">
+            <div class="level-left">
+                <h1 class="title">Sale</h1>
+            </div>
+            <div class="level-right">
+                <p class="title">Total: <%= @sale.price%><p>
+            </div>
+        </div>
+    </div>
+</div>
+<%= form_tag(search_sale_path, :method => "get",   
+    class: 'columns') do %>  
+    <div class="column is-one-third">
+        <div class="field">  
+            <%= search_field_tag :search, params[:search], placeholder: "Search", class: "input" %>   
+            <%= button_tag "", :class => 'fa fa-search button is-secondary',:name => nil%>  
+        </div>
+    </div>
+<% end %>
 <%= render 'form', sale: @sale %>
 
 <%= link_to 'Show', @sale %> |

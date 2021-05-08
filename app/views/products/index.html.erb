@@ -30,6 +30,9 @@
             </span>
           <% end %>
         </td>
+        <td>
+          <%= link_to '', product, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'fas fa-trash'%>
+        </td>
       </tr>
     <% end %>
   </tbody>

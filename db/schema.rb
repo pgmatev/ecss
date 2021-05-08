@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2021_01_27_191559) do
     t.index ["user_id"], name: "index_sales_on_user_id"
   end
 
-  create_table "sales_products", id: false, force: :cascade do |t|
+  create_table "products_sales", id: false, force: :cascade do |t|
     t.bigint "sale_id"
     t.bigint "product_id"
     t.index ["product_id"], name: "index_sales_products_on_product_id"

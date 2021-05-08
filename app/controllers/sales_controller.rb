@@ -61,6 +61,17 @@ class SalesController < ApplicationController
     end
   end
 
+  def search_product
+      if params[:search].blank?
+        redirect_to(sales_path, alert: "Empty field!") and return
+      else
+        @parameter = params[:search].downcase
+        @results = Product.where("user_id LIKE :current_user AND (:barcode OR :name)", current_user: current_user, barcode: @parameter, name: @parameter)
+        logger.info @results
+        @sale.products << :results
+      end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sale

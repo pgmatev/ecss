@@ -3,9 +3,6 @@
     <h1 class="title">Welcome</h1>
     <% if signed_in? %>
       <p class="subtitle"><%= current_user.name%></p>
-      <%# 
-      <%= button_to "Profile", edit_path(current_user), method: :get%
-      <%= button_to "Products", products_path(current_user), method: :get%>
     <% else %>
       <p class="subtitle">Please sign in or register</p>
     <% end %>
@@ -16,7 +13,7 @@
     <div class="column">
       <article>
         <p class="title">Sales</p>
-        <%= link_to "Begin new sale", sales_path, method: :post, :class => "link"%>
+        <%= link_to "Begin new sale", new_sale_path, :class => "link"%>
         <br>
         <%= link_to "Sales History", sales_path, method: :get, :class => "link"%>
 
