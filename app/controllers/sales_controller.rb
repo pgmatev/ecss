@@ -68,7 +68,7 @@ class SalesController < ApplicationController
         @parameter = params[:search].downcase
         @results = Product.where("user_id LIKE :current_user AND (:barcode OR :name)", current_user: current_user, barcode: @parameter, name: @parameter)
         logger.info @results
-        @sale.products << :results
+        @sale.products << @results
       end
   end
 

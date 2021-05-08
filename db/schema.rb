@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_27_191559) do
+ActiveRecord::Schema.define(version: 2021_05_08_192318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 2021_01_27_191559) do
     t.decimal "cost", precision: 10, scale: 2
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_deliveries_on_user_id"
+    t.bigint "users_id"
+    t.index ["users_id"], name: "index_deliveries_on_users_id"
   end
 
   create_table "deliveries_products", id: false, force: :cascade do |t|
@@ -38,6 +38,13 @@ ActiveRecord::Schema.define(version: 2021_01_27_191559) do
     t.index ["product_id"], name: "index_deliveries_products_on_product_id"
   end
 
+  create_table "product_sales", force: :cascade do |t|
+    t.integer "product_id"
+    t.integer "sale_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name", limit: 128
     t.integer "quantity"
@@ -46,7 +53,7 @@ ActiveRecord::Schema.define(version: 2021_01_27_191559) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
     t.string "barcode", limit: 12
-    t.index ["user_id"], name: "index_products_on_user_id"
+    t.index ["user_id"], name: "index_products_on_users_id"
   end
 
   create_table "sales", force: :cascade do |t|
@@ -55,15 +62,8 @@ ActiveRecord::Schema.define(version: 2021_01_27_191559) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
     t.bigint "client_id"
-    t.index ["client_id"], name: "index_sales_on_client_id"
-    t.index ["user_id"], name: "index_sales_on_user_id"
-  end
-
-  create_table "products_sales", id: false, force: :cascade do |t|
-    t.bigint "sale_id"
-    t.bigint "product_id"
-    t.index ["product_id"], name: "index_sales_products_on_product_id"
-    t.index ["sale_id"], name: "index_sales_products_on_sale_id"
+    t.index ["client_id"], name: "index_sales_on_clients_id"
+    t.index ["user_id"], name: "index_sales_on_users_id"
   end
 
   create_table "users", force: :cascade do |t|
