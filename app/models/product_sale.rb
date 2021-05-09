@@ -5,6 +5,9 @@ class ProductSale < ApplicationRecord
         "UPDATE sales
         SET total_price = total_price + products.price
         FROM products
-        WHERE sales.id = NEW.sale_id AND products.id = NEW.product_id"
+        WHERE sales.id = NEW.sale_id AND products.id = NEW.product_id;
+        UPDATE products
+        SET quantity = quantity - 1
+        WHERE products.id = NEW.product_id;"
     end
 end

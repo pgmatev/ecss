@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_09_194102) do
+ActiveRecord::Schema.define(version: 2021_05_09_200832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,9 @@ UPDATE sales
         SET total_price = total_price + products.price
         FROM products
         WHERE sales.id = NEW.sale_id AND products.id = NEW.product_id;
+        UPDATE products
+        SET quantity = quantity - 1
+        WHERE products.id = NEW.product_id;
     SQL_ACTIONS
   end
 
