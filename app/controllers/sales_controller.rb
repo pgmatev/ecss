@@ -63,13 +63,17 @@ class SalesController < ApplicationController
 
   def search_product
       if params[:search].blank?
-        redirect_to(sales_path, alert: "Empty field!") and return
+        redirect_to(sale_path, alert: "Empty field!") and return
       else
         @parameter = params[:search]
         @results = Product.where("barcode LIKE :barcode AND user_id = :user_id", user_id: current_user, barcode: @parameter)
         @sale.products << @results
-        redirect_to(sales_path) and return
+        redirect_to(sale_path) and return
       end
+  end
+
+  def remove_product
+    @sale.products.delete(product)
   end
 
   private
