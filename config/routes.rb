@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   get "/sign_up" => "clearance/users#new", as: "sign_up"
   get "/edit_profile" => "users#edit", as: "edit"
   post "/profile" => "users#update"
-  get '/edit' => 'sales#search_product', :as => 'search_sale'  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  post "/sales/:id/edit(.:format)" => "sales#search_product", as: "search_sale"
+  # get '/edit' => 'sales#search_product', :as => 'search_sale'  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "users#home";
   resources :users
   resources :products

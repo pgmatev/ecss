@@ -1,5 +1,5 @@
 class SalesController < ApplicationController
-  before_action :require_login, :set_sale, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, :set_sale, only: [:show, :edit, :update, :destroy, :search_product]
 
   # GET /sales
   # GET /sales.json
@@ -65,10 +65,10 @@ class SalesController < ApplicationController
       if params[:search].blank?
         redirect_to(sales_path, alert: "Empty field!") and return
       else
-        @parameter = params[:search].downcase
-        @results = Product.where("user_id LIKE :current_user AND (:barcode OR :name)", current_user: current_user, barcode: @parameter, name: @parameter)
-        logger.info @results
+        @parameter = params[:search]
+        @results = Product.where("barcode LIKE :barcode AND user_id = :user_id", user_id: current_user, barcode: @parameter)
         @sale.products << @results
+        redirect_to(sales_path) and return
       end
   end
 
