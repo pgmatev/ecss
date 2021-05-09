@@ -5,7 +5,7 @@
                 <h1 class="title">Sale</h1>
             </div>
             <div class="level-right">
-                <p class="title">Total: <%= @sale.price%><p>
+                <p class="title">Total: <%= @sale.total_price%><p>
             </div>
         </div>
     </div>
@@ -15,7 +15,7 @@
         class: 'column is-one-third') do %>  
         <p id="alert"><%= alert %></p>
             <div class="field">  
-                <%= search_field_tag :search, params[:search], placeholder: "Search", class: "input" %>   
+                <%= search_field_tag :search, params[:search], placeholder: "Enter Barcode", class: "input" %>   
                 <%= button_tag "", :class => 'fa fa-search button is-secondary',:name => nil%>  
             </div>
         <%= link_to 'Back', sales_path %>

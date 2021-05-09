@@ -1,0 +1,32 @@
+# This migration was auto-generated via `rake db:generate_trigger_migration'.
+# While you can edit this file, any changes you make to the definitions here
+# will be undone by the next auto-generated trigger migration.
+
+class CreateTriggerProductSalesInsert1 < ActiveRecord::Migration[6.0]
+  def up
+    drop_trigger("product_sales_after_insert_row_tr", "product_sales", :generated => true)
+
+    create_trigger("product_sales_after_insert_row_tr", :generated => true, :compatibility => 1).
+        on("product_sales").
+        after(:insert) do
+      <<-SQL_ACTIONS
+UPDATE sales
+        SET sales.price = sales.price + products.price
+        FROM sales
+        LEFT JOIN product_sales ON sales.id = product_sales.sale_id
+        LEFT JOIN products ON product_sales.product_id = products.id
+        WHERE sales.id = NEW.sale_id AND products.id = NEW.product_id;
+      SQL_ACTIONS
+    end
+  end
+
+  def down
+    drop_trigger("product_sales_after_insert_row_tr", "product_sales", :generated => true)
+
+    create_trigger("product_sales_after_insert_row_tr", :generated => true, :compatibility => 1).
+        on("product_sales").
+        after(:insert) do
+      "UPDATE sales SET price = price + 1 WHERE id = NEW.sale_id;"
+    end
+  end
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_08_192318) do
+ActiveRecord::Schema.define(version: 2021_05_09_194102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2021_05_08_192318) do
   end
 
   create_table "sales", force: :cascade do |t|
-    t.decimal "price", precision: 10, scale: 2
+    t.decimal "total_price", default: "0.0"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"
@@ -87,6 +87,17 @@ ActiveRecord::Schema.define(version: 2021_05_08_192318) do
     t.decimal "currency", precision: 10, scale: 2
     t.index ["client_id"], name: "index_users_clients_on_client_id"
     t.index ["user_id"], name: "index_users_clients_on_user_id"
+  end
+
+  create_trigger("product_sales_after_insert_row_tr", :generated => true, :compatibility => 1).
+      on("product_sales").
+      after(:insert) do
+    <<-SQL_ACTIONS
+UPDATE sales
+        SET total_price = total_price + products.price
+        FROM products
+        WHERE sales.id = NEW.sale_id AND products.id = NEW.product_id;
+    SQL_ACTIONS
   end
 
 end
