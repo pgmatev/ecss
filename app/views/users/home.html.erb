@@ -22,9 +22,9 @@
     <div class="column">
       <article>
         <p class="title">Deliveries</p>
-        <%= link_to "Enter a delivery", method: :get, :class => "link"%>
+        <%= link_to "Enter a delivery", new_delivery_path, :class => "link"%>
         <br>
-        <%= link_to "Delivery History", method: :get, :class => "link"%>
+        <%= link_to "Delivery History", deliveries_path, :class => "link"%>
       </article>
     </div>
     <div class="column">
