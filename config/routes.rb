@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get "/edit_profile" => "users#edit", as: "edit"
   post "/profile" => "users#update"
   post "/sales/:id" => "sales#search_product", as: "search_sale"
+  post "/deliveries/new" => "deliveries#search_product", as: "search_delivery"
   # get '/edit' => 'sales#search_product', :as => 'search_sale'  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "users#home";
   resources :users

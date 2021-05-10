@@ -1,10 +1,10 @@
 class DeliveriesController < ApplicationController
-  before_action :set_delivery, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, :set_delivery, only: [:show, :edit, :update, :destroy]
 
   # GET /deliveries
   # GET /deliveries.json
   def index
-    @deliveries = Delivery.all
+    @deliveries = current_user.deliveries.all
   end
 
   # GET /deliveries/1
@@ -14,7 +14,7 @@ class DeliveriesController < ApplicationController
 
   # GET /deliveries/new
   def new
-    @delivery = Delivery.new
+    @delivery = current_user.deliveries.new
   end
 
   # GET /deliveries/1/edit
@@ -24,7 +24,7 @@ class DeliveriesController < ApplicationController
   # POST /deliveries
   # POST /deliveries.json
   def create
-    @delivery = Delivery.new(delivery_params)
+    @delivery = current_user.deliveries.new(delivery_params)
 
     respond_to do |format|
       if @delivery.save
@@ -61,10 +61,21 @@ class DeliveriesController < ApplicationController
     end
   end
 
+  def search_product
+    if params[:search].blank?
+      redirect_to(new_delivery_path, alert: "Empty field!") and return
+    else
+      @parameter = params[:search]
+      @results = Product.where("barcode LIKE :barcode AND user_id = :user_id", user_id: current_user, barcode: @parameter)
+      @delivery.products << @results
+      redirect_to(new_delivery_path) and return
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_delivery
-      @delivery = Delivery.find(params[:id])
+      @delivery = current_user.deliveries.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

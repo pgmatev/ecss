@@ -1,5 +1,9 @@
 class Delivery < ApplicationRecord
     belongs_to :user
-    has_many :products, through: :deliveries_products
-    validates_numericality_of :cost, greater_than_or_equal_to: 0
+    has_many :products, through: :products_deliveries
+    has_many :products_deliveries
+
+    def init
+        self.cost ||= 0.0
+    end
 end

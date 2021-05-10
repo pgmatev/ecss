@@ -1,4 +1,44 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_delivery_path(@delivery) %> |
-<%= link_to 'Back', deliveries_path %>
+<div class="hero notification is-primary">
+    <div class="hero-body">
+        <div class="level">
+            <div class="level-left">
+                <h1 class="title">Delivery</h1>
+            </div>
+            <div class="level-right">
+                <p class="title">Cost: <%= @delivery.cost%><p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="columns">
+    <%= form_tag(search_sale_path, :method => "post",
+        class: 'column is-one-third') do %>  
+        <p id="alert"><%= alert %></p>
+            <div class="field">  
+                <%= search_field_tag :search, params[:search], placeholder: "Enter Barcode", class: "input" %>   
+                <%= button_tag "", :class => 'fa fa-search button is-secondary',:name => nil%>  
+            </div>
+        <%= link_to 'Back', deliveries_path %>
+    <% end %>
+    <div class="column is two-thirds">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Barcode</th>
+                    <th colspan="3"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @delivery.products.each do |product|%>
+                      <tr>
+                        <td><%= product.name %></td>
+                        <td><%= product.price %></td>
+                        <td><%= product.barcode %></td>
+                        </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
